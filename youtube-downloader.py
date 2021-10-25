@@ -3,8 +3,8 @@ from os import mkdir
 from os.path import isdir
 from re import findall
 from colorama import Fore,Style
-
-#merge audio and video
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import WebVTTFormatter
 
 
 class Youtube_downloader(object):
@@ -19,14 +19,12 @@ class Youtube_downloader(object):
         yt = YouTube(link)
         
         #in progressive make sure video has sound and filter only for mp4 files
-        # streams = yt.streams.filter(progressive=True , mime_type="video/mp4")
-        streams = yt.streams.filter(only_video=True , mime_type="video/mp4")
-        print(streams)
+        streams = yt.streams.filter(progressive=True , mime_type="video/mp4")
+        
         # get res from these example --> '<Stream: itag="22" mime_type="video/mp4" res="720p" fps="25fps" vcodec="avc1.64001F" acodec="mp4a.40.2" progressive="True" type="video">'
         regex = 'res=\"(.*p)\"'
         result = self.__find(regex , streams)
         choice = self.__choose_verification('resoulation' , result)
-        print(choice)
         name = yt.title
         dir = self.__createdir(name)
         
@@ -34,7 +32,6 @@ class Youtube_downloader(object):
         if dir == False:
             streams.get_by_resolution(choice).download(f'Downloads',filename = f'{name}-{choice}.mp4')
         else:
-            streams.get_by_resolution(choice).download(f'Downloads/{name}',filename = f'{name}-{choice}.mp4')
             streams.get_by_resolution(choice).download(f'Downloads/{name}',filename = f'{name}-{choice}.mp4')
         print(Fore.GREEN + 'Download completed !!' + Style.RESET_ALL)
 
@@ -68,18 +65,37 @@ class Youtube_downloader(object):
         print(Fore.GREEN + 'Download completed !!' + Style.RESET_ALL)
     
     def download_subtitle(self):
-        pass
+        print(Fore.BLUE + 'Youtube subtitle downloader' + Style.RESET_ALL)
+        link = input("Paste your video link here > ")
+        print(Fore.CYAN + 'Please wait...' + Style.RESET_ALL)
+        name = YouTube(link).title
+        
+        regex = 'watch\?v=(.*)'
+        link = findall(regex , link)
+        link = link[0]
+        
+        transcript = YouTubeTranscriptApi.get_transcript(link)
+        sub_formatter = WebVTTFormatter()
+
+        # .turns the link into a srt file.
+        srt = sub_formatter.format_transcript(transcript)
+        
+        self.__createdir(name)
+        
+        with open(f'Downloads/{name}/{name}.srt', 'w', encoding='utf-8') as srt_file:
+            srt_file.write(srt)
+        
     
     def __createdir(self,name):
         #check if dir not exists create it
         if isdir('Downloads') == False:
             mkdir('Downloads')
         while True :
-            choice = input('Do you want create folder for your file?(yes/no) > ')
+            choice = input('Do you want create and put in folder for your file?(yes/no) > ')
             if choice == 'yes':
                 if isdir(f'Downloads/{name}') == False:
                     mkdir(f'Downloads/{name}')
-                    break
+                break
             elif choice == 'no':
                 return False
             else:
@@ -127,7 +143,9 @@ class Youtube_downloader(object):
 
         
 y = Youtube_downloader()
-y.download_video()
+# y.download_video()
+# y.download_audio()
+y.download_subtitle()
 
 '''
 https://www.youtube.com/watch?v=vbvyNnw8Qjg
