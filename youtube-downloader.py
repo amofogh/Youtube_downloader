@@ -9,9 +9,10 @@ from youtube_transcript_api.formatters import WebVTTFormatter
 
 class Youtube_downloader(object):
     
-    
-    
     def download_video(self):
+        '''
+        download video from youtube
+        '''
         print(Fore.MAGENTA + 'Youtube video downloader' + Style.RESET_ALL)
         
         link = input("Paste your video link here > ")
@@ -36,7 +37,9 @@ class Youtube_downloader(object):
         print(Fore.GREEN + 'Download completed !!' + Style.RESET_ALL)
 
     def download_audio(self , mime_type = 'audio/mp4'):
-        
+        '''
+        download mp3 file from video of youtube
+        '''
         print(Fore.YELLOW + 'Youtube audio downloader' + Style.RESET_ALL)
         
         link = input("Paste your video link here > ")
@@ -65,6 +68,10 @@ class Youtube_downloader(object):
         print(Fore.GREEN + 'Download completed !!' + Style.RESET_ALL)
     
     def download_subtitle(self):
+        '''
+        download subtitle from youtube
+        '''
+        
         print(Fore.BLUE + 'Youtube subtitle downloader' + Style.RESET_ALL)
         link = input("Paste your video link here > ")
         print(Fore.CYAN + 'Please wait...' + Style.RESET_ALL)
@@ -84,6 +91,8 @@ class Youtube_downloader(object):
         
         with open(f'Downloads/{name}/{name}.srt', 'w', encoding='utf-8') as srt_file:
             srt_file.write(srt)
+        
+        print(Fore.GREEN + 'Download completed !!' + Style.RESET_ALL)
         
     
     def __createdir(self,name):
@@ -141,14 +150,7 @@ class Youtube_downloader(object):
         return {'result':result , 'result_str':result_str}
     
 
-        
-y = Youtube_downloader()
+# y = Youtube_downloader()
 # y.download_video()
 # y.download_audio()
-y.download_subtitle()
-
-'''
-https://www.youtube.com/watch?v=vbvyNnw8Qjg
-'''
-
-# progress bar for download
+# y.download_subtitle()
