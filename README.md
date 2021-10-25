@@ -1,6 +1,6 @@
 [![Download](https://img.shields.io/badge/Use%20now-youtube%20downlaoder-red)](https://www.youtube.com/)
 # Youtube_downloader
-###exe file for easy to use
+### exe file for easy to use
 Youtube downloader wrote by python
 
 you can download video,audio even subtitle with this bot
