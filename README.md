@@ -1,4 +1,4 @@
-[![Download](https://img.shields.io/badge/Install%20now-youtube%20downlaoder-red)](https://www.youtube.com/)
+[![Download](https://img.shields.io/badge/Use%20now-youtube%20downlaoder-red)](https://www.youtube.com/)
 # Youtube_downloader
 Youtube downloader wrote by python
 
