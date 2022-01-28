@@ -1,6 +1,5 @@
 [![Download](https://img.shields.io/badge/Use%20now-youtube%20downlaoder-red)](https://www.youtube.com/)
 # Youtube_downloader
-### exe file for easy to use for non-programmers
 Youtube downloader wrote by python
 
 you can download video,audio even subtitle with this bot
@@ -14,7 +13,6 @@ make instance of youtube_downloader than use the methods
 
 ```
 yt = Youtube_downloader()
-yt.download_video()
-yt.download_audio()
-yt.download_subtitle()
+yt.download(ink,file_type=audio/video)
+yt.download_subtitle(link)
 ```
