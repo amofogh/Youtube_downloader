@@ -4,8 +4,12 @@ Youtube downloader wrote by python
 
 you can download video,audio even subtitle with this bot
 
+### Before Run
+please install requirement first
 
-## How to use
+`pip install -r requirement.txt`
+
+### How to use
 make instance of youtube_downloader than use the methods
 
 ```
