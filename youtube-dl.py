@@ -54,7 +54,7 @@ class Youtube_downloader(object):
         print(Fore.GREEN + 'Downloading...' + Style.RESET_ALL)
         
         if file_type == 'video':
-            yt.streams.filter(resolutions=choice).first().download(f'Downloads/{title}', filename=f'{title}-{choice}.mp4')
+            yt.streams.filter(res=choice).first().download(f'Downloads/{title}', filename=f'{title}-{choice}.mp4')
         elif file_type == 'audio':
             yt.streams.filter(only_audio=True, abr=choice).first().download(f'Downloads/{title}', filename=f'{title}-{choice}.mp3')
 
@@ -75,7 +75,7 @@ class Youtube_downloader(object):
         # check directories 
         if isdir('Downloads') == False:
             mkdir('Downloads')        
-        if isdir('Downloads/subtitles') == False:
+        # if isdir('Downloads/subtitles') == False:
             mkdir('Downloads/subtitles')
             
         try:
